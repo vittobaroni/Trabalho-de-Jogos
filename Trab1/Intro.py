@@ -8,7 +8,7 @@ pygame.font.init()
 
 font = font = pygame.font.Font(None, 50)
 Nome = "vitto baroni"
-rect =  (260, 100, 175, 35)
+rect =  (340, 143, 300, 45)
 
 random.seed(Nome)
 x, y =  random.randint(0, 500), random.randint(0, 400)
