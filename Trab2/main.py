@@ -1,66 +1,67 @@
 import pygame
-from grid import Grid, Cell
-
+from grid import Grid
 
 pygame.init()
 pygame.font.init()
 
-WIDTH   =  800; HEIGHT =  600
+WIDTH = 800
+HEIGHT = 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  
-
-# caso precise de usar fontes na main, descomente
-
-#font_size
-#font = pygame.font.Font(None, font_size)
-
-# caso precise carregar imagens na main, descomente
-
-#idle = pygame.image.load("images/duck/duck.png").convert_alpha()
-#step = pygame.image.load("images/duck/step.png").convert_alpha()
-#etc
+pygame.display.set_caption("Eat the Duck")
 
 
-#numero de celulas
-grid_size = (5, 10)
+font = pygame.font.Font(None, 36)
+font_go = pygame.font.Font(None, 72)
 
 
-# Cria a janela
-WIDTH   =  800; HEIGHT =  600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))  
+clock = pygame.time.Clock()
 
-#criar objetos, adicione eles a lista
-objects = []
+grid_size = (20, 15)
+
+
+meu_grid = Grid(x=0, y=0, sprites=[], grid_size=grid_size)
+objects = [meu_grid]
 
 while True: 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.quit()
             exit()
 
-        # uso do mouse é obrigatório
+        
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if pygame.mouse.get_pressed()[0]: # 0 botão esquedo 2, direito
-                pass # faça algo
+            if pygame.mouse.get_pressed()[0]: # Botão esquerdo
+                pos_mouse = pygame.mouse.get_pos()
+                meu_grid.processar_clique(pos_mouse)
 
-        #caso queira usar levantar o mouse, descomente
-        #elif event.type == pygame.MOUSEBUTTONUP:
-        #                    exit()
-
-
-        # uso do teclado para controle é obrigatório
+        
         elif event.type == pygame.KEYDOWN:
-            #inclua outras funcionalidades para outras téclas
             if event.key == pygame.K_ESCAPE:
+                pygame.quit()
                 exit()
+            else:
+                
+                meu_grid.processar_tecla(event.key)
 
-        #atualiza
-        for obj in objects:
-            obj.update(1)
+    
+    for obj in objects:
+        obj.update(1)
 
-        # Desenha
-        screen.fill((30, 30, 30))
+    
+    screen.fill((30, 30, 30))
 
+    for obj in objects:
+        obj.draw(screen)
 
-        for obj in objects:
-            obj.draw()
+    
+    texto_pontos = font.render(f"Pontos: {meu_grid.pontos}", True, (255, 255, 255))
+    screen.blit(texto_pontos, (10, 10))
+    
+    if meu_grid.game_over:
+        texto_gameover = font_go.render("GAME OVER", True, (255, 50, 50))
+        screen.blit(texto_gameover, (WIDTH//2 - texto_gameover.get_width()//2, HEIGHT//2 - 50))
 
-        pygame.display.flip()
+    pygame.display.flip()
+    
+    
+    clock.tick(8)
