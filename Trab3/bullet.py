@@ -51,11 +51,13 @@ class Bullet (ABC):
     def move(self):
         pass
 
-    def destroy(self): # pede para deletar
-        EventHandler().notify("DestroyObj", self) # avisa o mundo que saiu da tela
+    def destroy(self):
+        EventHandler().notify("DestroyObj", self) 
 
 class sinBullet (Bullet):
-    # exemplo, façam algo mais rebuscado
-
     def move(self):
-        return pygame.Vector2(self.elapsed, math.sin(self.elapsed/50)*50) 
+        return pygame.Vector2(self.elapsed, math.sin(self.elapsed/50)*50)
+
+class StraightBullet(Bullet):
+    def move(self):
+        return pygame.Vector2(self.elapsed * 10, 0)
