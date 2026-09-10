@@ -1,3 +1,7 @@
+#o jogo é um joguinho de tiro, que aparece varias hordas de bolinhas laranjas ( inimigos ) que vão de caçar constantemente, e voce deve matá-las
+# COMO JOGAR : WASD ou setas para mover, espaço para atirar e recomeçar o jogo, e o mouse para mirar para onde você quer mirar 
+# gostaria de adicionar uma parte para aumentar a velocidade dos inimigos sem se tornar muito quebrado, mas vai ficar para futuramente, já que estou muito ocupado com a uff agora
+
 import pygame
 from player import Player, DeadState, NormalState, InvincibleState
 from enemy import Enemy, EnemySpawner, StunnedState
