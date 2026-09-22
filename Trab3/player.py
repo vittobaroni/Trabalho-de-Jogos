@@ -93,7 +93,7 @@ class NormalState(PlayerState):
         EventHandler().notify("AddObj", nova_bala)
 
     def action_2(self):
-        print("Ação 2: Futuro Dash ou Habilidade Especial!")
+        print("futuro coisa de invencibilidade aqui e tal!")
 
 class DeadState(PlayerState):
     sprite = colored_sprite((255, 0, 0))
